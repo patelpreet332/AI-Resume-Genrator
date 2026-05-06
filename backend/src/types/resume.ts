@@ -10,6 +10,12 @@ export interface ExperienceEntry {
   years: string;
 }
 
+export interface ProjectEntry {
+  title: string;
+  link: string;
+  description: string;
+}
+
 export interface ResumeInput {
   name: string;
   email: string;
@@ -21,5 +27,6 @@ export interface ResumeInput {
   isFresher: boolean;
   experienceList: ExperienceEntry[];
   educationList: EducationEntry[];
+  projectList: ProjectEntry[];
   achievements: string;
 }
