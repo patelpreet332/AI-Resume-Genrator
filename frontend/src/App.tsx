@@ -9,6 +9,8 @@ import {
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
 import './App.css';
+import BackgroundShapes from './components/BackgroundShapes';
+
 
 interface ResumeData {
   summary: string;
@@ -223,25 +225,35 @@ function App() {
     if (!resumeRef.current) return;
     
     try {
-      // Improved capturing options for full-page export
-      const canvas = await html2canvas(resumeRef.current, {
+      setIsLoading(true); // Re-use loading state to show progress
+      
+      // Wait a tiny bit for any layout shifts to settle
+      await new Promise(resolve => setTimeout(resolve, 500));
+
+      const element = resumeRef.current;
+      const canvas = await html2canvas(element, {
         scale: 2,
         useCORS: true,
         allowTaint: true,
         backgroundColor: "#ffffff",
         logging: false,
+        windowWidth: element.scrollWidth,
+        windowHeight: element.scrollHeight,
         onclone: (clonedDoc) => {
-          // Explicitly target the resume elements in the clone to remove scroll/height limits
           const paper = clonedDoc.querySelector('.resume-paper');
           const wrapper = clonedDoc.querySelector('.resume-paper-wrapper');
           
           if (paper) {
             (paper as HTMLElement).style.height = 'auto';
             (paper as HTMLElement).style.overflow = 'visible';
+            (paper as HTMLElement).style.position = 'static';
+            (paper as HTMLElement).style.transform = 'none';
           }
           if (wrapper) {
             (wrapper as HTMLElement).style.maxHeight = 'none';
             (wrapper as HTMLElement).style.overflow = 'visible';
+            (wrapper as HTMLElement).style.height = 'auto';
+            (wrapper as HTMLElement).style.padding = '0'; // Remove padding for cleaner capture
           }
         }
       });
@@ -249,15 +261,46 @@ function App() {
       const imgData = canvas.toDataURL('image/png');
       const pdf = new jsPDF('p', 'mm', 'a4');
       
-      const imgProps = pdf.getImageProperties(imgData);
       const pdfWidth = pdf.internal.pageSize.getWidth();
-      const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+      const pdfHeight = pdf.internal.pageSize.getHeight();
       
-      pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+      const imgWidth = canvas.width;
+      const imgHeight = canvas.height;
+      
+      // Calculate how many pages we need
+      const ratio = pdfWidth / imgWidth;
+      const canvasPageHeight = pdfHeight / ratio;
+      const totalPages = Math.ceil(imgHeight / canvasPageHeight);
+      
+      for (let i = 0; i < totalPages; i++) {
+        if (i > 0) {
+          pdf.addPage();
+        }
+        
+        const sourceY = i * canvasPageHeight;
+        const sWidth = imgWidth;
+        const sHeight = Math.min(canvasPageHeight, imgHeight - sourceY);
+        
+        // Use a temporary canvas to crop the image for each page
+        // This is cleaner than addImage with negative offsets which can sometimes bleed
+        const tempCanvas = document.createElement('canvas');
+        tempCanvas.width = sWidth;
+        tempCanvas.height = sHeight;
+        const ctx = tempCanvas.getContext('2d');
+        
+        if (ctx) {
+          ctx.drawImage(canvas, 0, sourceY, sWidth, sHeight, 0, 0, sWidth, sHeight);
+          const pageImgData = tempCanvas.toDataURL('image/png');
+          pdf.addImage(pageImgData, 'PNG', 0, 0, pdfWidth, (sHeight * pdfWidth) / sWidth);
+        }
+      }
+      
       pdf.save(`${formData.name.replace(/\s+/g, '_')}_Resume.pdf`);
     } catch (err) {
       console.error("PDF Generation Error:", err);
       setError("Failed to generate PDF. Please try again.");
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -273,7 +316,9 @@ function App() {
 
   return (
     <div className="app-container">
+      <BackgroundShapes />
       <main className="main-layout">
+
         <section className="left-side">
           <header className="header-left">
             <h1>AI Resume Architect</h1>
