@@ -1,6 +1,6 @@
 # 🚀 AI Resume Architect
 
-**AI Resume Architect** is an enterprise-grade, high-fidelity resume generation platform. It leverages state-of-the-art AI (Google Gemini 1.5 Flash) to transform raw career data into professionally architected, high-impact resumes. Designed with a premium glassmorphic interface, it provides a seamless 7-step wizard experience for job seekers.
+**AI Resume Architect** is an enterprise-grade, high-fidelity resume generation platform. It leverages state-of-the-art AI (Google Gemini 2.5 Flash) to transform raw career data into professionally architected, high-impact resumes. Designed with a premium glassmorphic interface, it provides a seamless 7-step wizard experience for job seekers.
 
 ![Premium Design](https://img.shields.io/badge/Design-Glassmorphic-purple)
 ![Tech Stack](https://img.shields.io/badge/Stack-React%20%7C%20Node%20%7C%20Gemini-blue)
@@ -109,16 +109,9 @@ The application will be accessible at `http://localhost:5173`.
 
 ---
 
-## 📸 Screenshots Section
 
 ![Application Screenshot](./mainpage.png)
 
-*The premium glassmorphic interface of the AI Resume Architect.*
-
----
-
-## 📄 License
-This project is licensed under the MIT License - see the LICENSE file for details.
 
 ---
 **Developed with Precision.** Ready for enterprise deployment.
