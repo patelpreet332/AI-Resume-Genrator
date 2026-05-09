@@ -1,7 +1,7 @@
 {
-  "name": "ai-resume-generator",
+  "name": "ai-resume-generator-api",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "src/index.ts",
   "scripts": {
     "dev": "ts-node-dev --respawn src/index.ts"
   },
