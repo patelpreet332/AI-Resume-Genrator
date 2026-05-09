@@ -53,7 +53,7 @@ graph TD
 ## 🛠️ Installation & Setup
 
 ### Prerequisites
-- Node.js (v18+)
+- Node.js (v20+)
 - Google Gemini API Key
 
 ### 1. Repository Setup
@@ -112,6 +112,3 @@ The application will be accessible at `http://localhost:5173`.
 
 ![Application Screenshot](./mainpage.png)
 
-
----
-**Developed with Precision.** Ready for enterprise deployment.
