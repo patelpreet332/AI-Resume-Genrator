@@ -110,7 +110,10 @@ The application will be accessible at `http://localhost:5173`.
 ---
 
 ## 📸 Screenshots Section
-*You can add project screenshots here later to showcase the premium UI.*
+
+![Application Screenshot](./mainpage.png)
+
+*The premium glassmorphic interface of the AI Resume Architect.*
 
 ---
 
