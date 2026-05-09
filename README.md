@@ -44,7 +44,7 @@ graph TD
 1. **Data Collection**: User navigates through the multi-step wizard.
 2. **AI Orchestration**: Frontend aggregates data and transmits it to the Node.js backend.
 3. **Prompt Engineering**: The backend sanitizes inputs and constructs a structured prompt for the LLM.
-4. **Intelligent Synthesis**: Gemini 1.5 Flash generates a structured JSON response containing the resume content.
+4. **Intelligent Synthesis**: Gemini 2.5 Flash generates a structured JSON response containing the resume content.
 5. **Real-time Preview**: The frontend parses the AI response and renders a high-fidelity preview.
 6. **Final Delivery**: User exports the result as a professional PDF or raw JSON data.
 
