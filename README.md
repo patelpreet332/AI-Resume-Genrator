@@ -1,4 +1,4 @@
-# 🚀 AI Resume Architect
+# AI Resume Architect
 
 **AI Resume Architect** is an enterprise-grade, high-fidelity resume generation platform. It leverages state-of-the-art AI (Google Gemini 2.5 Flash) to transform raw career data into professionally architected, high-impact resumes. Designed with a premium glassmorphic interface, it provides a seamless 7-step wizard experience for job seekers.
 
@@ -8,7 +8,7 @@
 
 ---
 
-## ✨ Core Features
+## Core Features
 
 - **7-Step Professional Wizard**: Granular data collection covering:
   - Contact Information
@@ -20,14 +20,14 @@
   - Achievements & Awards
 - **AI-Powered Content Generation**: Integrates with Google Gemini to architect professional summaries and action-oriented bullet points.
 - **High-Fidelity PDF Export**: Dynamic PDF generation using `html2canvas` and `jsPDF` with support for multi-page resumes.
-- **Persistence & Portability**: 
+- **Persistence & Portability**:
   - Automatic local storage persistence for session recovery.
   - JSON Import/Export for manual data portability.
 - **Premium UI/UX**: Sleek, dark-mode interface featuring CSS-based glassmorphism, smooth micro-animations, and responsive layouts.
 
 ---
 
-## 🏗️ System Architecture
+## System Architecture
 
 The system follows a modern decoupled architecture:
 
@@ -40,7 +40,7 @@ graph TD
     Frontend -- "Render" --> PDF[PDF Engine - jsPDF]
 ```
 
-### 🔄 Workflow Lifecycle
+### Workflow Lifecycle
 1. **Data Collection**: User navigates through the multi-step wizard.
 2. **AI Orchestration**: Frontend aggregates data and transmits it to the Node.js backend.
 3. **Prompt Engineering**: The backend sanitizes inputs and constructs a structured prompt for the LLM.
@@ -50,7 +50,7 @@ graph TD
 
 ---
 
-## 🛠️ Installation & Setup
+## Installation & Setup
 
 ### Prerequisites
 - Node.js (v20+)
@@ -58,8 +58,8 @@ graph TD
 
 ### 1. Repository Setup
 ```bash
-git clone https://github.com/patelpreet332/AI-Resume-Genrator.git
-cd AI-Resume-Genrator
+git clone https://github.com/patelpreet332/ai-resume-generator.git
+cd ai-resume-generator
 ```
 
 ### 2. Backend Configuration
@@ -84,7 +84,7 @@ The application will be accessible at `http://localhost:5173`.
 
 ---
 
-## ⚙️ Environment Variables
+## Environment Variables
 
 ### Backend (`/backend/.env`)
 | Variable | Description | Default |
@@ -97,15 +97,6 @@ The application will be accessible at `http://localhost:5173`.
 |----------|-------------|---------|
 | `VITE_PORT` | Dev Server Port | `5173` |
 | `VITE_API_URL` | Backend API Endpoint | `http://localhost:3000` |
-
----
-
-## 🛡️ Security & Performance
-
-- **Environment Isolation**: Sensitive API keys are strictly managed via environment variables and excluded from version control.
-- **Input Sanitization**: Backend-side prompt construction ensures clean data transmission to AI models.
-- **Optimized Rendering**: CSS-heavy styling reduces JS overhead, ensuring smooth 60fps animations.
-- **PDF Engine**: Optimized capture logic handles high-resolution rendering and page-break calculations.
 
 ---
 
